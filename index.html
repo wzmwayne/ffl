@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理课堂翻翻乐</title>
+    <style>
+        body {
+            background-color: #FFF8E7; /* 奶白色背景 */
+            text-align: center;
+            font-family: "Arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 32px;
+            color: #FFD700; /* 黄色字体 */
+        }
+        .game-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 120px);
+            grid-template-rows: repeat(4, 120px);
+            gap: 10px;
+            justify-content: center;
+        }
+        .card {
+            width: 120px;
+            height: 120px;
+            background-color: #FFD700; /* 金黄色 */
+            border-radius: 10px;
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .flipped {
+            background-color: #FFF; /* 翻开后颜色 */
+        }
+        .matched {
+            cursor: default;
+        }
+        #message {
+            font-size: 24px;
+            margin-top: 20px;
+            display: none;
+        }
+        #timer {
+            font-size: 24px;
+            color: #FF4500;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>心理课堂翻翻乐</h1>
+    <button onclick="startGame()">点击开始游戏</button>
+
+    <div class="game-container">
+        <div id="game-board"></div>
+        <div>
+            <p>⏳ 计时：<span id="timer">0</span> 秒</p >
+        </div>
+    </div>
+
+    <div id="message">🎉 恭喜你挑战成功！ 🎉</div>
+    <audio id="win-sound" src="https://www.fesliyanstudios.com/play-mp3/4382"></audio>
+
+    <script>
+        const items = ["🐶", "🐱", "🐰", "🐼", "🦊", "🐨", "🐸", "🐔"]; // 8种可爱动植物
+        let cards = [];
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let matchedPairs = 0;
+        let timer;
+        let timeElapsed = 0;
+        let gameStarted = false; // 计时器是否已启动
+
+        function startGame() {
+            clearInterval(timer); // 停止之前的计时器
+            timeElapsed = 0;
+            document.getElementById("timer").textContent = timeElapsed; // 计时归零
+            gameStarted = false; // 计时器尚未开始
+
+            const board = document.getElementById("game-board");
+            document.getElementById("message").style.display = "none";
+            board.innerHTML = "";
+            cards = [];
+            matchedPairs = 0;
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+
+            let cardContents = [...items, ...items]; // 8对共16张
+            cardContents = cardContents.sort(() => 0.5 - Math.random()); // 随机排列
+
+            for (let i = 0; i < 16; i++) {
+                const card = document.createElement("div");
+                card.classList.add("card", "flipped"); // 一开始全部翻开
+                card.dataset.animal = cardContents[i];
+                card.textContent = cardContents[i]; // 初始显示图案
+                card.onclick = () => flipCard(card);
+                board.appendChild(card);
+                cards.push(card);
+            }
+
+            setTimeout(() => { // 10秒后开始游戏，翻回去显示编号
+                cards.forEach((card, index) => {
+                    card.textContent = index + 1;
+                    card.classList.remove("flipped");
+                });
+
+                // 10秒后才开始计时
+                timer = setInterval(() => {
+                    timeElapsed++;
+                    document.getElementById("timer").textContent = timeElapsed;
+                }, 1000);
+                gameStarted = true;
+            }, 10000);
+        }
+
+        function flipCard(card) {
+            if (!gameStarted || lockBoard || card.classList.contains("matched") || card === firstCard) return;
+
+            card.textContent = card.dataset.animal;
+            card.classList.add("flipped");
+
+            if (!firstCard) {
+                firstCard = card;
+            } else {
+                secondCard = card;
+                lockBoard = true;
+
+                if (firstCard.dataset.animal === secondCard.dataset.animal) {
+                    firstCard.classList.add("matched");
+                    secondCard.classList.add("matched");
+                    firstCard = null;
+                    secondCard = null;
+                    matchedPairs++;
+
+                    if (matchedPairs === 8) {
+                        clearInterval(timer); // 停止计时
+                        document.getElementById("message").style.display = "block";
+                        document.getElementById("win-sound").play();
+                    }
+                    lockBoard = false;
+                } else {
+                    setTimeout(() => {
+                        firstCard.textContent = cards.indexOf(firstCard) + 1;
+                        secondCard.textContent = cards.indexOf(secondCard) + 1;
+                        firstCard.classList.remove("flipped");
+                        secondCard.classList.remove("flipped");
+                        firstCard = null;
+                        secondCard = null;
+                        lockBoard = false;
+                    }, 1000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
