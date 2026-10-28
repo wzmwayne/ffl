@@ -1,173 +1,85 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>心理课堂翻翻乐</title>
-    <style>
-        body {
-            background-color: #FFF8E7; /* 奶白色背景 */
-            text-align: center;
-            font-family: "Arial", sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        h1 {
-            font-size: 32px;
-            color: #FFD700; /* 黄色字体 */
-        }
-        .game-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        #game-board {
-            display: grid;
-            grid-template-columns: repeat(4, 120px);
-            grid-template-rows: repeat(4, 120px);
-            gap: 10px;
-            justify-content: center;
-        }
-        .card {
-            width: 120px;
-            height: 120px;
-            background-color: #FFD700; /* 金黄色 */
-            border-radius: 10px;
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        .flipped {
-            background-color: #FFF; /* 翻开后颜色 */
-        }
-        .matched {
-            cursor: default;
-        }
-        #message {
-            font-size: 24px;
-            margin-top: 20px;
-            display: none;
-        }
-        #timer {
-            font-size: 24px;
-            color: #FF4500;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>站点已关闭</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: #101013; color: #e8e8ea;
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
+    line-height: 1.75;
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 0 20px 96px; }
+  h1 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 8px; letter-spacing: .5px; }
+  .lead { color: #9aa0a6; margin: 0 0 32px; }
+  h2 { font-size: clamp(19px, 2.4vw, 24px); margin: 40px 0 12px; padding-left: 12px;
+        border-left: 5px solid #b3001b; }
+  p, li { font-size: clamp(15px, 1.7vw, 17px); }
+  ul { padding-left: 1.2em; }
+  li { margin: .35em 0; }
+  .card { background: #191a1f; border: 1px solid #2a2c33; border-radius: 14px;
+           padding: 22px 24px; margin: 18px 0; }
+  .muted { color: #8b9098; font-size: 14px; }
+  a { color: #ff6b6b; }
+  code { background: #22242b; padding: .12em .4em; border-radius: 6px; font-size: .92em; }
+</style>
 </head>
 <body>
+<div id="kab" role="alert">
+  <a href="https://keepandroidopen.org" target="_blank" rel="noopener">
+    Keep Android Open — 安卓必须保持开放
+  </a>
+  <div class="kab-sub">签名、安装与分发自由正在被侵蚀，请关注并参与：keepandroidopen.org</div>
+</div>
+<style>
+  /* 不可关闭、大号、置顶横幅 */
+  #kab {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 2147483647;
+    background: #b3001b; color: #fff;
+    padding: 18px 16px 16px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,.45);
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
+    border-bottom: 4px solid #ffd400;
+  }
+  #kab a {
+    color: #fff; text-decoration: none;
+    font-size: clamp(24px, 4.2vw, 46px); font-weight: 900;
+    letter-spacing: .5px; line-height: 1.15;
+  }
+  #kab a:hover { text-decoration: underline; }
+  #kab .kab-sub { margin-top: 8px; font-size: clamp(13px, 1.5vw, 18px); opacity: .95; }
+  @media (max-width: 640px) { #kab { padding: 14px 10px 12px; } }
+</style>
 
-    <h1>心理课堂翻翻乐</h1>
-    <button onclick="startGame()">点击开始游戏</button>
+<main style="padding-top: 200px;">
 
-    <div class="game-container">
-        <div id="game-board"></div>
-        <div>
-            <p>⏳ 计时：<span id="timer">0</span> 秒</p >
-        </div>
-    </div>
+<h1>因学业原因，项目暂停更新</h1>
+<p class="lead">本人因学业原因，暂时放缓各项目更新，学业告一段落后继续。</p>
 
-    <div id="message">🎉 恭喜你挑战成功！ 🎉</div>
-    <audio id="win-sound" src="https://www.fesliyanstudios.com/play-mp3/4382"></audio>
+<div class="card">
+  <h2 style="margin-top:0">公告</h2>
+  <p>因学业原因，账号下的仓库目前设为<strong>归档（只读）</strong>，本站不再提供任何下载、导航或资源链接，历史页面内容已移除。</p>
+  <p>仓库内容按「放弃所有权利」（Unlicense / 公有领域）发布，可自由取用、修改与再分发；暂停期间暂不提供支持与更新。</p>
+</div>
 
-    <script>
-        const items = ["🐶", "🐱", "🐰", "🐼", "🦊", "🐨", "🐸", "🐔"]; // 8种可爱动植物
-        let cards = [];
-        let firstCard = null;
-        let secondCard = null;
-        let lockBoard = false;
-        let matchedPairs = 0;
-        let timer;
-        let timeElapsed = 0;
-        let gameStarted = false; // 计时器是否已启动
+<h2>为什么关注 keepandroidopen.org</h2>
+<p>安卓生态正在从「开放安装」走向「受控分发」：侧载限制、开发者验证、平台签名垄断，会直接压缩个人开发者与普通用户的空间。这不是某一个应用的问题，而是整个平台的走向。</p>
+<p>请访问 <a href="https://keepandroidopen.org" target="_blank" rel="noopener">keepandroidopen.org</a> 了解进展与参与方式。</p>
 
-        function startGame() {
-            clearInterval(timer); // 停止之前的计时器
-            timeElapsed = 0;
-            document.getElementById("timer").textContent = timeElapsed; // 计时归零
-            gameStarted = false; // 计时器尚未开始
+<h2>本站现状</h2>
+<ul>
+  <li>下载链接、导航分组、旧版页面：<strong>已全部移除</strong>；</li>
+  <li>代码与文档：保留在 GitHub 仓库中（已归档，只读）；</li>
+  <li>许可：放弃所有权利，公有领域；</li>
+  <li>暂停期间暂不处理功能请求、问题反馈与合并请求，恢复后照常。</li>
+</ul>
+<p class="muted">暂停期间页面不再更新。</p>
 
-            const board = document.getElementById("game-board");
-            document.getElementById("message").style.display = "none";
-            board.innerHTML = "";
-            cards = [];
-            matchedPairs = 0;
-            firstCard = null;
-            secondCard = null;
-            lockBoard = false;
-
-            let cardContents = [...items, ...items]; // 8对共16张
-            cardContents = cardContents.sort(() => 0.5 - Math.random()); // 随机排列
-
-            for (let i = 0; i < 16; i++) {
-                const card = document.createElement("div");
-                card.classList.add("card", "flipped"); // 一开始全部翻开
-                card.dataset.animal = cardContents[i];
-                card.textContent = cardContents[i]; // 初始显示图案
-                card.onclick = () => flipCard(card);
-                board.appendChild(card);
-                cards.push(card);
-            }
-
-            setTimeout(() => { // 10秒后开始游戏，翻回去显示编号
-                cards.forEach((card, index) => {
-                    card.textContent = index + 1;
-                    card.classList.remove("flipped");
-                });
-
-                // 10秒后才开始计时
-                timer = setInterval(() => {
-                    timeElapsed++;
-                    document.getElementById("timer").textContent = timeElapsed;
-                }, 1000);
-                gameStarted = true;
-            }, 10000);
-        }
-
-        function flipCard(card) {
-            if (!gameStarted || lockBoard || card.classList.contains("matched") || card === firstCard) return;
-
-            card.textContent = card.dataset.animal;
-            card.classList.add("flipped");
-
-            if (!firstCard) {
-                firstCard = card;
-            } else {
-                secondCard = card;
-                lockBoard = true;
-
-                if (firstCard.dataset.animal === secondCard.dataset.animal) {
-                    firstCard.classList.add("matched");
-                    secondCard.classList.add("matched");
-                    firstCard = null;
-                    secondCard = null;
-                    matchedPairs++;
-
-                    if (matchedPairs === 8) {
-                        clearInterval(timer); // 停止计时
-                        document.getElementById("message").style.display = "block";
-                        document.getElementById("win-sound").play();
-                    }
-                    lockBoard = false;
-                } else {
-                    setTimeout(() => {
-                        firstCard.textContent = cards.indexOf(firstCard) + 1;
-                        secondCard.textContent = cards.indexOf(secondCard) + 1;
-                        firstCard.classList.remove("flipped");
-                        secondCard.classList.remove("flipped");
-                        firstCard = null;
-                        secondCard = null;
-                        lockBoard = false;
-                    }, 1000);
-                }
-            }
-        }
-    </script>
+</main>
 </body>
 </html>
